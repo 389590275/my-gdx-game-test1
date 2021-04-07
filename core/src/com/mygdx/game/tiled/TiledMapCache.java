@@ -66,6 +66,8 @@ public class TiledMapCache {
         };
     }
 
+
+
     public static GraphPath<Connection<Node>> findPath(Node start, Node end) {
         IndexedAStarPathFinder<Node> pathFinder = new IndexedAStarPathFinder<Node>(graph);
         GraphPath<Connection<Node>> out = new DefaultGraphPath<Connection<Node>>();
@@ -77,10 +79,6 @@ public class TiledMapCache {
                 return randomXS128.nextFloat();
             }
         }, out);
-        out.forEach(x -> {
-            int i = x.getToNode().getId();
-            System.out.println("x:" + i / 100 + " y:" + i % 100);
-        });
         return out;
     }
 
@@ -123,7 +121,7 @@ public class TiledMapCache {
         Node v = nodeMap.get(key);
         if (v == null) {
             v = new Node(key);
-            nodeMap. put(key, v);
+            nodeMap.put(key, v);
         }
         return v;
     }

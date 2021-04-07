@@ -1,6 +1,7 @@
 package com.mygdx.game.tiled;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.assets.AssetManager;
@@ -8,7 +9,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.*;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.findpath.Node;
@@ -26,6 +29,8 @@ public class TestGame extends Game {
     AssetManager assetManager = new AssetManager();
     SpriteBatch batch;
     String file = "atlas/player0001.atlas";
+    int curI = 0;
+
 
     @Override
     public void create() {
@@ -39,13 +44,15 @@ public class TestGame extends Game {
         //初始化地图
         TiledMapCache.initMap(map);
 
-        Node start = TiledMapCache.getNode(0, 9);
-        Node end = TiledMapCache.getNode(15, 0);
+        Node start = TiledMapCache.getNode(0, 0);
+        Node end = TiledMapCache.getNode(14, 0);
         this.path = TiledMapCache.findPath(start, end);
         assetManager.load(file, TextureAtlas.class);
         // 等待资源加载完毕
         assetManager.finishLoading();
     }
+
+    float time;
 
     @Override
     public void render() {
@@ -57,12 +64,19 @@ public class TestGame extends Game {
         TextureRegion textureRegion = textureAtlas.findRegion("01");
 
         batch.begin();
-        path.forEach(node -> {
-            int x = node.getToNode().getId() / 100;
-            int y = node.getToNode().getId() % 100;
-            batch.draw(textureRegion, x * 32, y * 32 ,32,32);
-        });
+        for (int i = 0; i <= curI && i < path.getCount(); i++) {
+            Node node = path.get(i).getToNode();
+            int id = node.getId();
+            int x = id / 100;
+            int y = id % 100;
+            batch.draw(textureRegion, x * 32, y * 32, 30, 30);
+        }
         batch.end();
+        time += Gdx.graphics.getDeltaTime();
+        if(time>0.3){
+            time = 0;
+            curI++;
+        }
     }
 
 }
