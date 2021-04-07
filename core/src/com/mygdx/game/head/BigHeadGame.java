@@ -3,7 +3,6 @@ package com.mygdx.game.head;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
@@ -13,6 +12,7 @@ import com.badlogic.gdx.math.Circle;
  * @date 2021/3/18 2:27 下午
  */
 public class BigHeadGame extends ApplicationAdapter {
+
     SpriteBatch batch;
     Texture bigTexture;
     Texture smallTexture;

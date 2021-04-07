@@ -16,6 +16,7 @@ public class WorldGame extends Game {
     @Override
     public void render() {
         gameStage.draw();
+
     }
 
     @Override

@@ -1,1 +1,3 @@
 include 'core', 'ios', 'desktop'
+include 'game'
+
