@@ -12,9 +12,11 @@ data/
 
 ### IntelliJ IDEA ###
 .idea
+.gradle
 *.iws
 *.iml
 *.ipr
+*.log
 
 ### NetBeans ###
 nbproject/private/
@@ -25,3 +27,5 @@ nbdist/
 .nb-gradle/
 /game-gateway-proto/
 /game-gateway-web.jar
+
+

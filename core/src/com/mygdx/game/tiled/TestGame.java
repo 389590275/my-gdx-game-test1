@@ -30,10 +30,7 @@ public class TestGame extends Game {
 
     @Override
     public void render() {
-        //Gdx.gl.glClearColor(205,205,205,0);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ScreenUtils.clear(205,205,205,0);
-
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
