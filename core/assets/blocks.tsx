@@ -923,7 +923,7 @@
  </tile>
  <tile id="197">
   <properties>
-   <property name="road" type="bool" value="false"/>
+   <property name="road" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="198">

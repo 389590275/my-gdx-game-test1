@@ -1,6 +1,9 @@
 package com.mygdx.game.findpath;
 
-import com.badlogic.gdx.ai.pfa.*;
+import com.badlogic.gdx.ai.pfa.Connection;
+import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
+import com.badlogic.gdx.ai.pfa.GraphPath;
+import com.badlogic.gdx.ai.pfa.Heuristic;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
 import com.badlogic.gdx.math.RandomXS128;
@@ -28,20 +31,20 @@ public class FindPath {
                 Array<Connection<Node>> connections = new Array<Connection<Node>>();
                 switch (fromNode.getId()) {
                     case 1:
-                        connections.add(new WeightedConnection<Node>(n1, n2,1));
+                        connections.add(new WeightedConnection<Node>(n1, n2, 1));
                         break;
                     case 2:
-                        connections.add(new WeightedConnection<Node>(n2, n3,1));
-                        connections.add(new WeightedConnection<Node>(n2, n5,5));
+                        connections.add(new WeightedConnection<Node>(n2, n3, 1));
+                        connections.add(new WeightedConnection<Node>(n2, n5, 5));
                         break;
                     case 3:
-                        connections.add(new WeightedConnection<Node>(n3, n4,1));
+                        connections.add(new WeightedConnection<Node>(n3, n4, 1));
                         break;
                     case 4:
-                        connections.add(new WeightedConnection<Node>(n4, n5,1));
+                        connections.add(new WeightedConnection<Node>(n4, n5, 1));
                         break;
                     case 5:
-                        connections.add(new WeightedConnection<Node>(n5, n4,1));
+                        connections.add(new WeightedConnection<Node>(n5, n4, 1));
                         break;
                 }
                 return connections;
@@ -60,15 +63,12 @@ public class FindPath {
 
         IndexedAStarPathFinder<Node> pathFinder = new IndexedAStarPathFinder<Node>(graph);
         GraphPath<Connection<Node>> out = new DefaultGraphPath<Connection<Node>>();
+        RandomXS128 randomXS128 = new RandomXS128();
         // Heuristic 启发函数
         pathFinder.searchConnectionPath(n1, n5, new Heuristic<Node>() {
             @Override
             public float estimate(Node node, Node endNode) {
-                // 2到5的距离
-                if(node.getId() * endNode.getId() == 10){
-                    return 5;
-                }
-                return 1;
+                return randomXS128.nextFloat();
             }
         }, out);
 
