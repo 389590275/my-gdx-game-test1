@@ -22,17 +22,24 @@ public class TiledMapCache {
     public static final int w = 16;
     public static final int h = 10;
     public static IndexedGraph<Node> graph;
-    public static Map<Integer, Node> nodeMap = new HashMap<>();
+    public static Node[][] nodes = new Node[w][h];
 
 
     public static void initMap(TiledMap map) {
+        //初始化节点
+        int index = 0;
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++, index++) {
+                nodes[x][y] = new Node(index, x, y);
+            }
+        }
         // 创建连通图
         graph = new IndexedGraph<Node>() {
             @Override
             public Array<Connection<Node>> getConnections(Node fromNode) {
                 Array<Connection<Node>> connections = new Array<Connection<Node>>();
-                int x = fromNode.getId() / 100;
-                int y = fromNode.getId() % 100;
+                int x = fromNode.getX();
+                int y = fromNode.getY();
                 if (!isRoad(map, x, y))
                     return connections;
                 Node now = getNode(x, y);
@@ -54,9 +61,7 @@ public class TiledMapCache {
 
             @Override
             public int getIndex(Node node) {
-                int x = node.getId() / 100;
-                int y = node.getId() % 100;
-                return x + y * w;
+                return node.getIndex();
             }
 
             @Override
@@ -66,17 +71,15 @@ public class TiledMapCache {
         };
     }
 
-
-
     public static GraphPath<Connection<Node>> findPath(Node start, Node end) {
         IndexedAStarPathFinder<Node> pathFinder = new IndexedAStarPathFinder<Node>(graph);
         GraphPath<Connection<Node>> out = new DefaultGraphPath<Connection<Node>>();
         RandomXS128 randomXS128 = new RandomXS128();
-        // Heuristic 启发函数
         pathFinder.searchConnectionPath(start, end, new Heuristic<Node>() {
+            // Heuristic 启发函数 h() 表示当前节点到终点的直线距离
             @Override
             public float estimate(Node node, Node endNode) {
-                return randomXS128.nextFloat();
+                 return Math.abs(endNode.getX() - node.getX()) + Math.abs(endNode.getY() - node.getY());
             }
         }, out);
         return out;
@@ -112,19 +115,8 @@ public class TiledMapCache {
         return true;
     }
 
-    public static int getKey(int x, int y) {
-        return x * 100 + y;
-    }
-
     public static Node getNode(int x, int y) {
-        int key = getKey(x, y);
-        Node v = nodeMap.get(key);
-        if (v == null) {
-            v = new Node(key);
-            nodeMap.put(key, v);
-        }
-        return v;
+        return nodes[x][y];
     }
-
 
 }

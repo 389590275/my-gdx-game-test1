@@ -18,18 +18,18 @@ import com.badlogic.gdx.utils.Array;
 public class FindPath {
 
     public static void main(String[] args) {
-        final Node n1 = new Node(1);
-        final Node n2 = new Node(2);
-        final Node n3 = new Node(3);
-        final Node n4 = new Node(4);
-        final Node n5 = new Node(5);
+        final Node n1 = new Node(1, 0, 0);
+        final Node n2 = new Node(2, 0, 0);
+        final Node n3 = new Node(3, 0, 0);
+        final Node n4 = new Node(4, 0, 0);
+        final Node n5 = new Node(5, 0, 0);
 
         // 创建连通图
         IndexedGraph<Node> graph = new IndexedGraph<Node>() {
             @Override
             public Array<Connection<Node>> getConnections(Node fromNode) {
                 Array<Connection<Node>> connections = new Array<Connection<Node>>();
-                switch (fromNode.getId()) {
+                switch (fromNode.getIndex()) {
                     case 1:
                         connections.add(new WeightedConnection<Node>(n1, n2, 1));
                         break;
@@ -52,7 +52,7 @@ public class FindPath {
 
             @Override
             public int getIndex(Node node) {
-                return node.getId() - 1;
+                return node.getIndex() - 1;
             }
 
             @Override
@@ -73,7 +73,7 @@ public class FindPath {
         }, out);
 
         out.forEach(x -> {
-            int i = x.getToNode().getId();
+            int i = x.getToNode().getIndex();
             System.out.println(i);
         });
 

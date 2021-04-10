@@ -66,10 +66,8 @@ public class TestGame extends Game {
         batch.begin();
         for (int i = 0; i <= curI && i < path.getCount(); i++) {
             Node node = path.get(i).getToNode();
-            int id = node.getId();
-            int x = id / 100;
-            int y = id % 100;
-            batch.draw(textureRegion, x * 32, y * 32, 30, 30);
+
+            batch.draw(textureRegion, node.getX() * 32, node.getY() * 32, 30, 30);
         }
         batch.end();
         time += Gdx.graphics.getDeltaTime();
