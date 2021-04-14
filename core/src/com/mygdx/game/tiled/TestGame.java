@@ -14,12 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.findpath.Node;
 
-/**
- * @author xiangchijie
- * @date 2021/4/5 9:43 下午
- */
 public class TestGame extends Game {
 
     TiledMap map;

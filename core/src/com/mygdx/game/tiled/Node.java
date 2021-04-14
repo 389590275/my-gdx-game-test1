@@ -1,4 +1,4 @@
-package com.mygdx.game.findpath;
+package com.mygdx.game.tiled;
 
 /**
  * @author xiangchijie

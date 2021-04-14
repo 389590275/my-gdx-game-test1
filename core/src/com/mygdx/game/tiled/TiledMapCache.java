@@ -8,10 +8,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.RandomXS128;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.findpath.Node;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author xiangchijie
@@ -74,7 +70,6 @@ public class TiledMapCache {
     public static GraphPath<Connection<Node>> findPath(Node start, Node end) {
         IndexedAStarPathFinder<Node> pathFinder = new IndexedAStarPathFinder<Node>(graph);
         GraphPath<Connection<Node>> out = new DefaultGraphPath<Connection<Node>>();
-        RandomXS128 randomXS128 = new RandomXS128();
         pathFinder.searchConnectionPath(start, end, new Heuristic<Node>() {
             // Heuristic 启发函数 h() 表示当前节点到终点的直线距离
             @Override

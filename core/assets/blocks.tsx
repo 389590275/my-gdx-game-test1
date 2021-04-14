@@ -190,6 +190,11 @@
   <properties>
    <property name="road" type="bool" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="18" y="10">
+    <polygon points="0,0 7,8 1,14 -7,12 -9,6"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="41">
   <properties>
@@ -375,6 +380,11 @@
   <properties>
    <property name="road" type="bool" value="false"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="15" y="3">
+    <polygon points="0,0 17,7 16,24 4,30 -12,23 -13,8"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="81">
   <properties>
