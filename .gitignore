@@ -17,6 +17,7 @@ data/
 *.iml
 *.ipr
 *.log
+.gradle/
 
 ### NetBeans ###
 nbproject/private/
