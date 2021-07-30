@@ -9,7 +9,10 @@ import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.google.gson.Gson;
+
 
 /**
  * @author xiangchijie
@@ -36,6 +39,7 @@ public class CollisionGame extends Game {
         // 等待资源加载完毕
         assetManager.finishLoading();
         test();
+        parseMap();
     }
 
     @Override
@@ -84,6 +88,15 @@ public class CollisionGame extends Game {
         }
         TiledMapTile tile = cell.getTile();
         return tile.getProperties().get("road", false, Boolean.class);
+    }
+
+    public void parseMap(){
+        Gson gson = new Gson();
+        String json = gson.toJson(map.getTileSets());
+        System.out.println(json);
+        TiledMapTileSets tiledMap2 = gson.fromJson(json,TiledMapTileSets.class);
+        int i = 0;
+
     }
 
 }
